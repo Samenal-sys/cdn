@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <style>
+    @font-face {
+      font-family: "Press Start 2P";
+      src: url("https://storage.wildwest.gg/uploads/1730265476288_press_start_2p.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Press Start 2P", cursive;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+    }
+
+    #controls-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.95);
+      padding: 20px;
+      border: 2px solid #fff;
+      z-index: 1000;
+      text-align: left;
+      line-height: 2;
+    }
+
+    #game-frame {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
+
+    button {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-family: "Press Start 2P", cursive;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button:hover {
+      background: #ddd;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="controls-popup">
+    Movement: Arrow Keys<br>
+    A: X<br>
+    B: C<br>
+    L: Q<br>
+    Z: Space<br>
+    Start: Enter<br>
+    C-stick: WASD
+    <button onclick="(function() { document.getElementById('controls-popup').style.display = 'none'; document.getElementById('game-frame').style.display = 'block'; })()">OK</button>
+  </div>
+  <iframe id="game-frame" src="https://samenal-sys.github.io/cdn/a/b/c/d/e/f/g/h/i/" style="display: none;"></iframe>
+
+</body>
+
+</html>
