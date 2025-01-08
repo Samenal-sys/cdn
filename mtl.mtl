@@ -1,0 +1,10 @@
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Cadillac_CT4_V_2022_lambert6_BaseColor.png
+bump  -bm 0.113636 Cadillac_CT4_V_2022_lambert6_Normal.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Cadillac_CT4_V_2022_lambert6_Roughness.png
