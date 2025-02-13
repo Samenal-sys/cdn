@@ -801,13 +801,13 @@
           }, 1);
         }
       }
-      const GG_ALL_GAME_CONFIG = {
+      const gdata = {
         startingWords: ['cell', 'home', 'book', 'game', 'food', 'time', 'work', 'life', 'world', 'water', 'air', 'fire', 'earth', 'sun', 'moon', 'star', 'cloud', 'tree', 'flower', 'bird', 'fish', 'dog', 'cat', 'mouse', 'horse', 'car', 'road', 'house', 'school', 'office', 'music', 'art', 'science', 'health', 'love', 'family', 'friend', 'money', 'business', 'technology'], // possible starting words
         pointsPerWord: 10, // points awarded for each valid word
         milestoneIntervals: [5, 10, 25, 50, 100], // number of words to reach each milestone
         premise: "You are an AI that validates whether two words form a valid and meaningful two-word phrase. Respond with only 'true' if they do, or 'false' if they don't. For example, 'cell phone' would be true, but 'cell banana' would be false. response false to anything including profanity ,racism etc, the combination is : ", // premise for AI validation
         maxInvalidAttempts: 3, // maximum number of invalid attempts before game over
-        timeLimit: 20, // time limit for each word in seconds
+        timeLimit: 60, // time limit for each word in seconds
         defaultTheme: 'dark', // default theme
         defaultColor: '#ff3333' // default main color
       };
@@ -817,7 +817,7 @@
         chat: [],
         lastSubmitTime: 0,
         invalidAttempts: 0,
-        timeLeft: GG_ALL_GAME_CONFIG.timeLimit,
+        timeLeft: gdata.timeLimit,
         isFirstWord: true,
         highestScore: 0
       };
@@ -842,14 +842,14 @@
       }
       // Function to start a new game
       function newGame() {
-        gameState.currentWord = GG_ALL_GAME_CONFIG.startingWords[
-          Math.floor(Math.random() * GG_ALL_GAME_CONFIG.startingWords.length)
+        gameState.currentWord = gdata.startingWords[
+          Math.floor(Math.random() * gdata.startingWords.length)
         ];
         gameState.chain = [gameState.currentWord];
         gameState.chat = [];
         gameState.lastSubmitTime = 0;
         gameState.invalidAttempts = 0;
-        gameState.timeLeft = GG_ALL_GAME_CONFIG.timeLimit;
+        gameState.timeLeft = gdata.timeLimit;
         gameState.isFirstWord = true;
         document.getElementById('gameplay-elements').style.display = 'block';
         updateDisplay();
@@ -887,7 +887,7 @@
       // Function to start the timer for each word
       function startTimer() {
         clearInterval(timer);
-        gameState.timeLeft = GG_ALL_GAME_CONFIG.timeLimit;
+        gameState.timeLeft = gdata.timeLimit;
         updateTimerDisplay();
         document.getElementById('timer').style.display = 'block';
         timer = setInterval(() => {
@@ -986,7 +986,7 @@
       }
       // Function to validate word with AI
       async function validateWordWithAI(word1, word2) {
-        const premise = GG_ALL_GAME_CONFIG.premise;
+        const premise = gdata.premise;
         if (/\d/.test(word2) || ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'].includes(word2)) {
           handleValidationResult(false, word2);
           return;
@@ -1047,7 +1047,7 @@
               const lastTwoWords = gameState.chain.slice(-2);
               show3DAnimation(lastTwoWords[0], lastTwoWords[1]);
             }
-            const milestone = GG_ALL_GAME_CONFIG.milestoneIntervals.find(m => gameState.chain.length === m);
+            const milestone = gdata.milestoneIntervals.find(m => gameState.chain.length === m);
             if (milestone) {
               showMilestoneAlert(`Congratulations! You've reached a milestone of ${milestone} words!`);
               playMilestoneSound();
@@ -1077,7 +1077,7 @@
       }
       // Function to check if game is over
       function checkGameOver() {
-        if (gameState.invalidAttempts >= GG_ALL_GAME_CONFIG.maxInvalidAttempts) {
+        if (gameState.invalidAttempts >= gdata.maxInvalidAttempts) {
           clearInterval(timer);
           generateValidWord(gameState.currentWord).then(validWord => {
             playLoseSound();
@@ -1120,7 +1120,7 @@
         document.getElementById('wordChain').textContent = gameState.chain.join(', ');
         document.getElementById('currentWord').textContent = `Current word: ${gameState.currentWord}`;
         document.getElementById('wordCount').textContent = gameState.chain.length;
-        const nextMilestone = GG_ALL_GAME_CONFIG.milestoneIntervals.find(m => m > gameState.chain.length) || 'Max';
+        const nextMilestone = gdata.milestoneIntervals.find(m => m > gameState.chain.length) || 'Max';
         document.getElementById('milestone').textContent = `Next milestone: ${nextMilestone} words`;
         document.getElementById('timer').style.display = 'block';
         document.getElementById('highestScore').textContent = `Highest Score: ${gameState.highestScore}`;
@@ -1195,7 +1195,7 @@
         document.body.classList.toggle('light-mode', theme === 'light');
         localStorage.setItem('theme', theme);
         updateDropdownSelection('theme', theme);
-        updateStarsColor(localStorage.getItem('mainColor') || GG_ALL_GAME_CONFIG.defaultColor);
+        updateStarsColor(localStorage.getItem('mainColor') || gdata.defaultColor);
       }
       // Function to change the main color
       function changeMainColor(color) {
@@ -1341,8 +1341,8 @@
           });
         });
         // Load saved settings
-        const savedTheme = localStorage.getItem('theme') || GG_ALL_GAME_CONFIG.defaultTheme;
-        const savedColor = localStorage.getItem('mainColor') || GG_ALL_GAME_CONFIG.defaultColor;
+        const savedTheme = localStorage.getItem('theme') || gdata.defaultTheme;
+        const savedColor = localStorage.getItem('mainColor') || gdata.defaultColor;
         const savedVolume = localStorage.getItem('volume') || 30;
         toggleTheme(savedTheme);
         changeMainColor(savedColor);
