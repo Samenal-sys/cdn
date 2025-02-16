@@ -1386,7 +1386,16 @@
         backgroundMusic.play().catch(e => console.error("Error playing background music:", e));
       }
       // Play background music when the page loads
-      playBackgroundMusic();
+            function onUserAction() {
+    playBackgroundMusic();
+    // Remove the event listener after the first action
+    document.removeEventListener('click', onUserAction);
+    document.removeEventListener('keydown', onUserAction);
+}
+
+// Attach the event listener to the document
+document.addEventListener('click', onUserAction);  // Trigger on any mouse click
+document.addEventListener('keydown', onUserAction);  // Or trigger on key press
       // Add event listeners for color change buttons
       document.querySelectorAll('.dropdown-content button').forEach(button => {
         button.addEventListener('click', function() {
