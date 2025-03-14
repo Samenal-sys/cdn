@@ -4,13 +4,12 @@
 <head>
   <meta name="referrer" content="no-referrer-when-downgrade">
   <style>
-    @font-face {
-      font-family: "Press Start 2P";
-      src: url("https://storage.wildwest.gg/uploads/1730265476288_press_start_2p.woff2") format("woff2");
-      font-weight: normal;
-      font-style: normal;
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    * {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
     }
-
     body {
       margin: 0;
       padding: 0;
@@ -68,11 +67,21 @@
     B: C<br>
     L: Q<br>
     Z: Space<br>
-    Start: Enter<br>
+    Start: Space<br>
     C-stick: WASD
-    <button onclick="(function() { document.getElementById('controls-popup').style.display = 'none'; document.getElementById('game-frame').style.display = 'block'; })()">OK</button>
+    <button onclick="ok()">OK</button>
   </div>
-  <iframe id="game-frame" src="https://samenal-sys.github.io/cdn/a/b/c/d/e/f/g/h/i/" style="display: none;"></iframe>
+  <script>
+    function ok() {
+      document.getElementById('controls-popup').style.display = 'none'; 
+      const gframe = document.getElementById('game-frame');
+      gframe.style.display = 'block';
+      gframe.src = gframe.src;
+      gframe.contentWindow.focus();
+      
+    }
+  </script>
+  <iframe id="game-frame" src="game.html" style="display: none;"></iframe>
 
 </body>
 
